@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    container_name: xxxxx_app
+    build:
+      context: ./config/php
+      dockerfile: Dockerfile
+    volumes:
+      - ${PWD}/src:/var/www/html
+      - ${PWD}/config/php/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - 8000:80
+    networks:
+      - xxxxx
+
+  db:
+    image: cytopia/mariadb-5.5
+    container_name: xxxxx_mariadb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=xxxxx
+      - MYSQL_DATABASE=xxxxx
+      - MYSQL_USER=xxxxx
+      - MYSQL_PASSWORD=xxxxx
+    volumes:
+      # MySQLの設定ファイル
+      - ${PWD}/mysql:/var/lib/mysql
+      - ${PWD}/config/mysql/my.cnf:/etc/mysql/docker-default.d/my.cnf
+      - ${PWD}/src/api/setup:/home/docker/data/setup
+    networks:
+      - xxxxx
+
+networks:
+  xxxxx:
