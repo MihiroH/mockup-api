@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    container_name: xxxxx_app
+    container_name: whomee_app
     build:
       context: ./config/php
       dockerfile: Dockerfile
@@ -12,25 +12,25 @@ services:
     ports:
       - 8000:80
     networks:
-      - xxxxx
+      - whomee
 
   db:
     image: cytopia/mariadb-5.5
-    container_name: xxxxx_mariadb
+    container_name: whomee_mariadb
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=xxxxx
-      - MYSQL_DATABASE=xxxxx
-      - MYSQL_USER=xxxxx
-      - MYSQL_PASSWORD=xxxxx
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       # MySQLの設定ファイル
       - ${PWD}/mysql:/var/lib/mysql
       - ${PWD}/config/mysql/my.cnf:/etc/mysql/docker-default.d/my.cnf
       - ${PWD}/src/api/setup:/home/docker/data/setup
     networks:
-      - xxxxx
+      - whomee
 
 networks:
-  xxxxx:
+  whomee:

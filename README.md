@@ -1,7 +1,9 @@
 # API
 
 ## How to setup
+- ./src/api/setup/setup.sqlのxxxxxの箇所を編集
 - `$ docker-compose up -d`
+- `$ docker-compose --env-file ./.env.local up`
 - `$ docker-compose exec app /bin/sh`
 - `$ php api/setup/export_prefs_regions_to_csv.php api/setup/list.csv`  
 警告が表示されたら各csvに問題がないか確認。
